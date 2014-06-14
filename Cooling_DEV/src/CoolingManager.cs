@@ -6,8 +6,7 @@ using UnityEngine;
 
 namespace CoolingSystem
 {
-    /*
-     * This Class will Manage 
+    /* This Class will Manage 
      * 1. Mutiple Parts
      * 2. The Generatet Cooling Energy
      */
@@ -44,9 +43,30 @@ namespace CoolingSystem
             }
         }
 
-        public static void getLostEnergy(this Vessel thisVessel)
+        public static float getLostEnergy(this Vessel thisVessel)
         {
+            float ret = 0.0f;
+            /*Berechnung des Verlustes mit Hilfe der Pumpen und Schiffsteile
+             * 0.97 = kerbilsche Verschwendungskonstante
+             *  aviableCooling * Parts * 0.97 / Pumpen / aviableCooling * 100
+             */
+            CoolingManager.aviableCooling.TryGetValue(thisVessel,out ret);
+            ret = ret * thisVessel.parts.Count * 0.97f / thisVessel.getActivePumpCount() / ret * 100.0f;
+            return ret;
+        }
 
+        public static int getActivePumpCount(this Vessel thisVessel)
+        {
+            int ret = 0;
+            foreach (var item in CoolingManager.Pumps)
+            {
+                if (item.Value)
+                {
+                    ret++;
+                }
+            }
+
+            return ret;
         }
     }
 }
