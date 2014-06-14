@@ -1,0 +1,12 @@
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Durability.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Durability.pdb
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Assembly-CSharp.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\UnityEngine.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Mono.Cecil.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Assembly-CSharp-firstpass.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\TDx.TDxInput.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Mono.Security.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Debug\Assembly-CSharp.xml
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\obj\Debug\Durability.csprojResolveAssemblyReference.cache
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\obj\Debug\Durability.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\obj\Debug\Durability.pdb

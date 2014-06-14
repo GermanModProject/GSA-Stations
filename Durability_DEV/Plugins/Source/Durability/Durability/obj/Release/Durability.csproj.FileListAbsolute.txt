@@ -1,0 +1,4 @@
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Release\Durability.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\bin\Release\Durability.pdb
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\obj\Release\Durability.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\Durability\obj\Release\Durability.pdb
