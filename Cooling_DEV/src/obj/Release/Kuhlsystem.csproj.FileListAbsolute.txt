@@ -1,5 +1,0 @@
-C:\Users\Janikiii\Desktop\Community\Kuhlsystem\Output\Plugins\Kuhlsystem.dll
-C:\Users\Janikiii\Desktop\Community\Kuhlsystem\Kuhlsystem\obj\Release\Kuhlsystem.csprojResolveAssemblyReference.cache
-C:\Users\Janikiii\Desktop\Community\Kuhlsystem\Kuhlsystem\obj\Release\Kuhlsystem.dll
-C:\Users\Janikiii\Google Drive\Community\Kuhlsystem\Output\Plugins\Kuhlsystem.dll
-C:\Users\Janikiii\Google Drive\Community\Kuhlsystem\Kuhlsystem\obj\Release\Kuhlsystem.dll
