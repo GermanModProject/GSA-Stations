@@ -48,10 +48,10 @@ namespace CoolingSystem
             float ret = 0.0f;
             /*Berechnung des Verlustes mit Hilfe der Pumpen und Schiffsteile
              * 0.97 = kerbilsche Verschwendungskonstante
-             *  aviableCooling * Parts * 0.97 / Pumpen / aviableCooling * 100
+             *  aviableCooling * Parts * 0.97 / (Pumpen  + Amoniakamount*0.97) / aviableCooling * 100
              */
             CoolingManager.aviableCooling.TryGetValue(thisVessel,out ret);
-            ret = ret * thisVessel.parts.Count * 0.97f / thisVessel.getActivePumpCount() / ret * 100.0f;
+            ret = ret * thisVessel.parts.Count * 0.97f / (thisVessel.getActivePumpCount() + (thisVessel.getAmoniakAmount() * Mathf.Pow(0.97f,3)))/ ret * 100.0f;
             return ret;
         }
 
@@ -64,6 +64,18 @@ namespace CoolingSystem
                 {
                     ret++;
                 }
+            }
+
+            return ret;
+        }
+
+        public static float getAmoniakAmount(this Vessel thisVessel)
+        {
+            float ret = 0;
+            foreach (var item in thisVessel.parts)
+            {
+                ret += (float)item.Resources["Amoniak"].amount;
+                
             }
 
             return ret;

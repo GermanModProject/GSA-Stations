@@ -9,3 +9,8 @@ C:\Users\Janikiii\documents\visual studio 2010\Projects\CoolingSystem\CoolingSys
 C:\Users\Janikiii\documents\visual studio 2010\Projects\CoolingSystem\CoolingSystem\obj\Debug\CoolingSystem.csprojResolveAssemblyReference.cache
 C:\Users\Janikiii\documents\visual studio 2010\Projects\CoolingSystem\CoolingSystem\obj\Debug\CoolingSystem.dll
 C:\Users\Janikiii\documents\visual studio 2010\Projects\CoolingSystem\CoolingSystem\obj\Debug\CoolingSystem.pdb
+C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\bin\Debug\CoolingSystem.dll
+C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\bin\Debug\CoolingSystem.pdb
+C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Debug\CoolingSystem.csprojResolveAssemblyReference.cache
+C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Debug\CoolingSystem.dll
+C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Debug\CoolingSystem.pdb
