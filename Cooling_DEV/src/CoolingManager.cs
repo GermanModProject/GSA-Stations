@@ -14,6 +14,16 @@ namespace CoolingSystem
     {
         public static Dictionary<Vessel, float> aviableCooling = new Dictionary<Vessel, float>();
         public static Dictionary<Part, bool> Pumps = new Dictionary<Part, bool>();
+
+
+        public static void addCoolingEnergy(Vessel vessel, float amount)
+        {
+            float ret = 0.0f;
+            CoolingManager.aviableCooling.TryGetValue(vessel, out ret);
+            ret += amount;
+            CoolingManager.aviableCooling.Remove(vessel);
+            CoolingManager.aviableCooling.Add(vessel, ret);
+        }
     }
 
 
@@ -26,14 +36,7 @@ namespace CoolingSystem
             return ret;
         }
 
-        public static void addCoolingEnergy(this Vessel thisVessel, float amount)
-        {
-            float ret = 0.0f;
-            CoolingManager.aviableCooling.TryGetValue(thisVessel, out ret);
-            ret += amount;
-            CoolingManager.aviableCooling.Remove(thisVessel);
-            CoolingManager.aviableCooling.Add(thisVessel, ret);
-        }
+       
 
         public static void addIfNotExists(this Vessel thisVessel)
         {
