@@ -39,6 +39,7 @@ namespace KspDeMod.Durability
         [KSPField(isPersistant = false, guiActive = false, guiName = "Temp Mutli ", guiUnits = "", guiFormat = "F0")]
         public double displayTempMutli;
 
+
         /// <summary>
         /// GForece Display Debugger
         /// </summary>
@@ -118,14 +119,25 @@ namespace KspDeMod.Durability
         public FloatCurve idealTemp = new FloatCurve();
 
         /// <summary>
-        /// LAst Update (MissionTime)
+        /// Last Update (MissionTime)
         /// </summary>
-        [KSPField(isPersistant = true)]
-        public double lastUpdate;
+        [KSPField(isPersistant = true, guiActive = false, guiName = "lastUpdateTime")]
+        public double lastUpdateTime = 0.01d;
 
-        private PartModule deadlyReentry = null;
+        /// <summary>
+        /// Last reduce
+        /// </summary>
+        [KSPField(isPersistant = true, guiActive = false, guiName = "lastReduceRange ")]
+        public double lastReduceRange = 0.01d;
 
-        [KSPEvent(guiName = "No Damage", guiActiveUnfocused = false, externalToEVAOnly = true, guiActive = false, unfocusedRange = 4f)]
+        private bool _isInit = false;
+        private bool _isFirst = true;
+        private int _countUpdates = 0;
+        private bool _debug = true;
+
+        private PartModule _deadlyReentry = null;
+
+        [KSPEvent(guiName = "No Damage", guiActiveUnfocused = true, externalToEVAOnly = true, guiActive = false, unfocusedRange = 4f)]
         public void RepairDamage()
         {
             if (Events == null || !canRepair)
@@ -172,14 +184,24 @@ namespace KspDeMod.Durability
 
         public override void OnAwake()
         {
+            //Debug.Log("KspDeMod: [OnAwake]: " + this.name);
             base.OnAwake();
-            if (part && part.Modules != null)
+            try
             {
-                if (part.Modules.Contains("ModuleAeroReentry"))
-                { 
-                    deadlyReentry = part.Modules["ModuleAeroReentry"];
-                    Fields["displayTemperature"].guiActive = false;
+                if (part && part.Modules != null)
+                {
+                    if (part.Modules.Contains("ModuleAeroReentry"))
+                    { 
+                        _deadlyReentry = part.Modules["ModuleAeroReentry"];
+                        //Fields["displayTemperature"].guiActive = false;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("KspDeMod: [OnAwake]: Message: " + ex.Message);
+                Debug.LogError("KspDeMod: [OnAwake]: Source: " + ex.Source);
+                Debug.LogError("KspDeMod: [OnAwake]: StackTrace: " + ex.StackTrace);
             }
         }
 
@@ -193,25 +215,66 @@ namespace KspDeMod.Durability
             base.OnStart(state);
             if (state == StartState.Editor)
             {
+                if (part.Resources.Contains("Quality"))
+                {
+                    part.Resources["Quality"].amount = quality * 100;
+                }
                 return;
             }
-            quality = part.Resources["Quality"].amount / 100;
-
+            if (part.Resources.Contains("Quality"))
+            {
+                quality = part.Resources["Quality"].amount / 100;
+            }
             checkStatus();
-
             setEventLabel();
 
-            Debug.Log("KspDeMod: [checkStatus]: quality:" + quality.ToString());
-            Debug.Log("KspDeMod: [checkStatus]: displayQuality:" + displayQuality.ToString());
+           
+
+            Debug.Log("KspDeMod: [OnStart]: quality:" + quality.ToString());
+            Debug.Log("KspDeMod: [OnStart]: displayQuality:" + displayQuality.ToString());
+
+            Debug.Log("KspDeMod: [OnStart]: damageRate: " + damageRate.ToString());
+            Debug.Log("KspDeMod: [OnStart]: vessel.missionTime: " + vessel.missionTime.ToString());
+            Debug.Log("KspDeMod: [OnStart]: lastReduceRange: " + lastReduceRange.ToString());
+            Debug.Log("KspDeMod: [OnStart]: lastUpdateTime: " + lastUpdateTime.ToString());
+            Debug.Log("KspDeMod: [OnStart]: maxRepair: " + maxRepair.ToString());
+            Debug.Log("KspDeMod: [OnStart]: canRepair: " + canRepair.ToString());
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            checkStatus();
-            lastUpdate = vessel.missionTime;
+            if (_isFirst)
+            {
+                _isFirst = false;
+                Debug.Log("KspDeMod: [OnUpdate]: Start First Update");
+                Debug.Log("KspDeMod: [OnUpdate]: vessel.missionTime: " + vessel.missionTime.ToString());
+                //Recalculate Durability
+                try
+                {
+                    if (vessel.missionTime > 0 && lastUpdateTime > 0)
+                    {
+                        double reReduce = (vessel.missionTime - lastUpdateTime) * lastReduceRange;
+                        Debug.Log("KspDeMod: [OnUpdate]: recalculate Duability: " + reReduce.ToString("F0"));
+                        if (part.Resources.Contains("Durability") && reReduce > 0)
+                        {
+                            part.Resources["Durability"].amount -= reReduce;
+                        }
+                    }
+                    _isInit = true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("KspDeMod: [OnUpdate] Recalculate: Message: " + ex.Message);
+                    Debug.LogError("KspDeMod: [OnUpdate] Recalculate: Source: " + ex.Source);
+                    Debug.LogError("KspDeMod: [OnUpdate] Recalculate: StackTrace: " + ex.StackTrace);
+                }
+            }
+
+            checkStatus();            
             reduceDurability();
             setEventLabel();
+            _countUpdates++;
         }
 
         public override void OnFixedUpdate()
@@ -234,34 +297,46 @@ namespace KspDeMod.Durability
             displayQuality = quality * 100;
             displayTemperature = part.temperature.ToString("0.00");
             displayGeeforce = vessel.geeForce;
-            if (quality > 0 && quality < 1)
+            try
             {
-                part.Resources["Quality"].amount = quality * 100;
-            } 
-            else
-            {
-                quality = 0.5d;
-                part.Resources["Quality"].amount = 50d;
+                if (part.Resources.Contains("Quality"))
+                {
+                    if (quality > 0 && quality < 1)
+                    {
+                        part.Resources["Quality"].amount = quality * 100;
+                    }
+                    else
+                    {
+                        quality = 0.5d;
+                        part.Resources["Quality"].amount = 50d;
+                    }
+                }
+                if (part.Resources.Contains("Durability"))
+                {
+                    if (part.Resources["Durability"].amount <= 0 && canExplode)
+                    {
+                        part.explode();
+                    }
+                    else
+                    {
+                        if (part.Resources["Durability"].amount <= minDurability && !part.frozen)
+                        {
+                            part.freeze();
+                            Debug.Log("KspDeMod: [checkStatus]: freeze Part " + part.name);
+                        }
+                        else if (part.Resources["Durability"].amount > minDurability && part.frozen)
+                        {
+                            part.unfreeze();
+                            Debug.Log("KspDeMod: [checkStatus]: unfreeze Part " + part.name);
+                        }
+                    }
+                }
             }
-            if (part.Resources.Contains("Durability"))
+            catch (Exception ex)
             {
-                if (part.Resources["Durability"].amount <= 0 && canExplode)
-                {
-                    part.explode();
-                }
-                else
-                {
-                    if (part.Resources["Durability"].amount <= minDurability && !part.frozen)
-                    {
-                        part.freeze();
-                        Debug.Log("KspDeMod: [checkStatus]: freeze Part " + part.name);
-                    }
-                    else if (part.Resources["Durability"].amount > minDurability && part.frozen)
-                    {
-                        part.unfreeze();
-                        Debug.Log("KspDeMod: [checkStatus]: unfreeze Part " + part.name);
-                    }
-                }
+                Debug.LogError("KspDeMod: [checkStatus]: Message: " + ex.Message);
+                Debug.LogError("KspDeMod: [checkStatus]: Source :" + ex.Source);
+                Debug.LogError("KspDeMod: [checkStatus]: StackTrace: " + ex.StackTrace);
             }
         }
 
@@ -274,7 +349,7 @@ namespace KspDeMod.Durability
                 if (displayDurability < 100 && canRepair && quality > 0.01)
                 {
                     Events["RepairDamage"].guiName = "Repair";
-                    Events["RepairDamage"].guiActive = true;
+                    //Events["RepairDamage"].guiActive = true;
                 }
                 else if (!canRepair)
                 {
@@ -298,7 +373,9 @@ namespace KspDeMod.Durability
             }
             catch(Exception ex)
             {
-                Debug.LogError("KspDeMod: [setEventLabel]: " + ex.Message);
+                Debug.LogError("KspDeMod: [setEventLabel]: Message: " + ex.Message);
+                Debug.LogError("KspDeMod: [setEventLabel]: Source: " + ex.Source);
+                Debug.LogError("KspDeMod: [setEventLabel]: StackTrace: " + ex.StackTrace);
             }
         }
 
@@ -313,67 +390,83 @@ namespace KspDeMod.Durability
         private void reduceDurability()
         {
             double reduce = 0;
-
-            if (part.Resources.Contains("Durability"))
+            try
             {
-                if (part.Resources["Durability"].amount > 0)
+                if (part.Resources.Contains("Durability"))
                 {
-                    //Temperature
-                    double TempMutli = 0;
-                    TempMutli = idealTemp.Evaluate(part.temperature) * (damageRate * damageRate) + 1;
-                    displayTempMutli = TempMutli;
-
-                    //GeeForce
-                    double GeeForceMutli = 1;
-                    if (vessel.geeForce > 1 && vessel.geeForce < 9)
+                    if (part.Resources["Durability"].amount > 0)
                     {
-                        GeeForceMutli = (vessel.geeForce * vessel.geeForce * damageRate) + 1;
+                        //Temperature
+                        double TempMutli = 0;
+                        TempMutli = idealTemp.Evaluate(part.temperature) * (damageRate * damageRate) + 1;
+                        displayTempMutli = TempMutli;
+
+                        //GeeForce
+                        double GeeForceMutli = 1;
+                        if (vessel.geeForce > 1 && vessel.geeForce < 9)
+                        {
+                            GeeForceMutli = (vessel.geeForce * vessel.geeForce * damageRate) + 1;
+                        }
+                        else if (vessel.geeForce >= 9)
+                        {
+                            GeeForceMutli = (vessel.geeForce * vessel.geeForce) + 1;
+                        }
+                        displayGeeForceMutli = GeeForceMutli;
+                    
+                        // Default
+                        //reduce = (1.001d - quality) * damageRate * (Planetarium.TimeScale * Time.deltaTime);
+                        reduce += (1.001d - quality) * damageRate * displayTempMutli * GeeForceMutli * TimeWarp.fixedDeltaTime;
+
+                        displayGeeforce = vessel.geeForce;
+
+                        double secondsToZero = part.Resources["Durability"].amount / (reduce * (1 / TimeWarp.fixedDeltaTime));
+                    
+                        double KerbalYearSec = (426.08 * 6 * 60 * 60);
+                        double KerbalDaySec = (6 * 60 * 60);
+                        double KerbalHourSec = (60 * 60);
+
+                        int years = (int)Math.Floor(secondsToZero / KerbalYearSec);
+                        secondsToZero -= years * KerbalYearSec;
+
+                        int days = (int)Math.Floor(secondsToZero / KerbalDaySec);
+                        secondsToZero -= days * KerbalDaySec;
+
+                        int hours = (int)Math.Floor(secondsToZero / KerbalHourSec);
+                        secondsToZero -= hours * KerbalHourSec;
+
+                        int minutes = (int)Math.Floor(secondsToZero / 60);
+                        secondsToZero -= minutes * 60;
+
+                        int seconds = (int)Math.Floor(secondsToZero);
+
+                        displayTime = "T+ " + ((years > 0) ? "y" + years.ToString("D2") + ", " : "") +
+                            ((days > 0) ? "d" + days.ToString("D2") + ", " : "") +
+                            hours.ToString("D2") + ":" + 
+                            minutes.ToString("D2") + ":" + 
+                            seconds.ToString("D2");
+                        if (reduce > 0.0)
+                        {
+                            if (_isInit && vessel.missionTime > 0.01)
+                            {
+                                lastUpdateTime = vessel.missionTime;
+                                lastReduceRange = reduce * (1 / TimeWarp.fixedDeltaTime);
+                                //Debug.Log("KspDeMod: [reduceDurability]: Update lastReduce and lastUpdate");
+                            }
+                        }
                     }
-                    else if (vessel.geeForce >= 9)
+                    else if (part.Resources["Durability"].amount < 0)
                     {
-                        GeeForceMutli = (vessel.geeForce * vessel.geeForce) + 1;
+                        part.Resources["Durability"].amount = 0;
                     }
-                    displayGeeForceMutli = GeeForceMutli;
                     
-                    // Default
-                    //reduce = (1.001d - quality) * damageRate * (Planetarium.TimeScale * Time.deltaTime);
-                    reduce += (1.001d - quality) * damageRate * displayTempMutli * GeeForceMutli * TimeWarp.fixedDeltaTime;
-
-                    displayGeeforce = vessel.geeForce;
-
-                    double secondsToZero = part.Resources["Durability"].amount / (reduce * (1 / TimeWarp.fixedDeltaTime));
-                    
-                    double KerbalYearSec = (426.08 * 6 * 60 * 60);
-                    double KerbalDaySec = (6 * 60 * 60);
-                    double KerbalHourSec = (60 * 60);
-
-                    int years = (int)Math.Floor(secondsToZero / KerbalYearSec);
-                    secondsToZero -= years * KerbalYearSec;
-
-                    int days = (int)Math.Floor(secondsToZero / KerbalDaySec);
-                    secondsToZero -= days * KerbalDaySec;
-
-                    int hours = (int)Math.Floor(secondsToZero / KerbalHourSec);
-                    secondsToZero -= hours * KerbalHourSec;
-
-                    int minutes = (int)Math.Floor(secondsToZero / 60);
-                    secondsToZero -= minutes * 60;
-
-                    int seconds = (int)Math.Floor(secondsToZero);
-
-                    displayTime = "T+ " + ((years > 0) ? "y" + years.ToString("D2") + ", " : "") +
-                        ((days > 0) ? "d" + days.ToString("D2") + ", " : "") +
-                        hours.ToString("D2") + ":" + 
-                        minutes.ToString("D2") + ":" + 
-                        seconds.ToString("D2");
-                    
+                    part.Resources["Durability"].amount -= reduce;
                 }
-                else if (part.Resources["Durability"].amount < 0)
-                {
-                    part.Resources["Durability"].amount = 0;
-                }
-                    
-                part.Resources["Durability"].amount -= reduce;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("KspDeMod: [reduceDurability]: Message: " + ex.Message);
+                Debug.LogError("KspDeMod: [reduceDurability]: Source: " + ex.Source);
+                Debug.LogError("KspDeMod: [reduceDurability]: StackTrace: " + ex.StackTrace);
             }
         }
         
@@ -394,6 +487,40 @@ namespace KspDeMod.Durability
                 Debug.Log("KspDeMod [GetDurabilityPercent]: Resource Durability not Found");
             }
             return percent * 100;
+        }
+
+        public override void OnSave(ConfigNode node)
+        {
+            base.OnSave(node);
+            try
+            {
+                Debug.Log("KspDeMod: [OnSave]: vessel.missionTime: " + vessel.missionTime.ToString());
+                Debug.Log("KspDeMod: [OnSave]: lastReduceRange: " + lastReduceRange.ToString());
+                Debug.Log("KspDeMod: [OnSave]: lastUpdateTime: " + lastUpdateTime.ToString());
+            }
+            catch { }
+        }
+
+        public override void OnLoad(ConfigNode node)
+        {
+            base.OnLoad(node);
+            try
+            {
+                Debug.Log(node);
+                if( node.HasValue("lastUpdateTime"))
+                {
+                    double.TryParse(node.GetValue("lastUpdateTime"), out this.lastUpdateTime);
+                }
+                if( node.HasValue("lastReduceRange"))
+                {
+                    double.TryParse(node.GetValue("lastReduceRange"), out this.lastReduceRange);
+                }               
+                    
+                Debug.Log("KspDeMod: [OnLoad]: vessel.missionTime: " + vessel.missionTime.ToString());
+                Debug.Log("KspDeMod: [OnLoad]: lastReduceRange: " + lastReduceRange.ToString());
+                Debug.Log("KspDeMod: [OnLoad]: lastUpdateTime: " + lastUpdateTime.ToString());
+            }
+            catch { }
         }
     }
 }
