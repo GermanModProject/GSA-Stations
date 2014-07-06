@@ -1,5 +1,0 @@
-C:\Users\Janikiii\Desktop\Est\KSP_win\GameData\CoolingSystem.dll
-C:\Users\Janikiii\Desktop\Est\KSP_win\GameData\CoolingSystem.pdb
-C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Release\CoolingSystem.csprojResolveAssemblyReference.cache
-C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Release\CoolingSystem.dll
-C:\Users\Janikiii\Documents\GitHub\Das-Mod-Projekt\Cooling_DEV\src\obj\Release\CoolingSystem.pdb
