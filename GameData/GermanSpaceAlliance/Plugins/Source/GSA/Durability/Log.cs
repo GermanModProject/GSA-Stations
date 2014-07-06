@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace KspDeMod.Durability
+namespace GSA.Durability
 {
     static class Debug
     {

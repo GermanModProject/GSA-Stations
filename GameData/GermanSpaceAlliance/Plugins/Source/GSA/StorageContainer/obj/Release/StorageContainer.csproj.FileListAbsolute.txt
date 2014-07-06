@@ -1,0 +1,11 @@
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\StorageContainer.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\StorageContainer.pdb
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\Assembly-CSharp.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\Mono.Cecil.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\Assembly-CSharp-firstpass.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\TDx.TDxInput.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\Mono.Security.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\bin\Release\Assembly-CSharp.xml
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\obj\Release\StorageContainer.csprojResolveAssemblyReference.cache
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\obj\Release\StorageContainer.dll
+E:\Game Development\Projects\KSP Mods\KSP.de Community Mod\GameData\KspDeMod\Plugins\Source\Durability\StorageContainer\obj\Release\StorageContainer.pdb
