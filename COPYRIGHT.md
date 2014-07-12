@@ -7,4 +7,4 @@ ThomasKerman: GSA1.png; Ariane_Main; Ariane_Second; Ariane_Fairing_new; KerbiMul
 
 runner78: 
   Plugins: Durability; Storage Container;
-  Parts: GSA-PA01-MK-I; GSA-SC01-MK-I;
+  Parts: GSA-PA01-MK-I; GSA-SC01-MK-I; GSA-SPLAP-T3;
