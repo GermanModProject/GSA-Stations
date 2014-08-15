@@ -3,7 +3,9 @@ Das-Mod-Projekt
 
 Die zentrale Sammelstelle für den Code des KSP.de - Mod Projektes
 
-ThomasKerman: GSA1.png; Ariane_Main; Ariane_Second; Ariane_Fairing_new; KerbiMultiHub;
+ThomasKerman: 
+	Flags: GSA1.png
+	Parts: Ariane_Main; Ariane_Second; Ariane_Fairing_new; KerbiMultiHub;; GSA-ScienceBox; GSA-ScienceEngine;
 
 runner78: 
   Plugins: Durability; Storage Container;
