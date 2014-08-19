@@ -10,3 +10,6 @@ ThomasKerman:
 runner78: 
   Plugins: Durability; Storage Container;
   Parts: GSA-PA01-MK-I; GSA-SC01-MK-I; GSA-SPLAP-T3;
+  
+JebediahKerman:
+	Parts: Merlin 1D; Falcon 9 MainTank;
