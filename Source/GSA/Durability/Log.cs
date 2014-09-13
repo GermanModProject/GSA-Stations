@@ -8,7 +8,7 @@ namespace GSA.Durability
 {
     static class Debug
     {
-        public static bool debug = false;
+        public static bool debug = true;
 
         public static void Log(object message)
         {
