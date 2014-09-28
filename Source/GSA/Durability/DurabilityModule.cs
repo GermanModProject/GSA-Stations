@@ -25,51 +25,51 @@ namespace GSA.Durability
         #region KSPFields
 
         /// <summary>
-        /// Display Pressure
+        /// Display Damage
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(damage) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]Damage")]
         public string displayDamage;
 
         /// <summary>
         /// Display Pressure
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(pressure) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]Pressure")]
         public string displayPressure;
 
         /// <summary>
         /// Display Temperature
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(engine) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]Engine")]
         public string displayEngine;
 
         /// <summary>
         /// Display GeeForce
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(G) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]G")]
         public string displayGeeForce;
 
         /// <summary>
         /// Display GeeForce
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(Temp) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]Temp")]
         public string displayTempM;
 
         /// <summary>
         /// Display ReactionWheel
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(RWheel) ")]
+        [KSPField(isPersistant = false, guiActive = false, guiName = "[D]RWheel")]
         public string displayReactionWheel;
 
         /// <summary>
         /// Display Experiment
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(Expe.) ")]
+        [KSPField(isPersistant = false, guiActive = true, guiName = "[D]Expe.")]
         public string displayExp;
 
         /// <summary>
         /// Display Sun
         /// </summary>
-        [KSPField(isPersistant = false, guiActive = false, guiName = "Deb(sun.) ")]
+        [KSPField(isPersistant = false, guiActive = false, guiName = "[D]Rad")]
         public string displaySun;
 
         /// <summary>
@@ -187,6 +187,8 @@ namespace GSA.Durability
         private ModuleReactionWheel _reactionWheel = null;
         private ModuleEngines _engine = null;
         private CelestialBody _sun = null;
+        private ModuleScienceExperiment _scienceExperiment = null;
+        private double _finalReduce = 0;
 
         #endregion //Private Fields
 
@@ -243,7 +245,7 @@ namespace GSA.Durability
                 if (part && part.Modules != null)
                 {
                     if (part.Modules.Contains("ModuleAeroReentry"))
-                    { 
+                    {
                         _deadlyReentry = part.Modules["ModuleAeroReentry"];
                     }
                 }
@@ -251,7 +253,6 @@ namespace GSA.Durability
             catch (Exception ex)
             {
                 GSA.Durability.Debug.LogError("GSA Durability: [OnAwake]: Message: " + ex.Message);
-                GSA.Durability.Debug.LogError("GSA Durability: [OnAwake]: Source: " + ex.Source);
                 GSA.Durability.Debug.LogError("GSA Durability: [OnAwake]: StackTrace: " + ex.StackTrace);
             }
         }
@@ -264,50 +265,63 @@ namespace GSA.Durability
         {
             GSA.Durability.Debug.Log("GSA Durability: [OnStart][" + state.ToString() + "]: " + this.name);
             base.OnStart(state);
-            _state = state;
-            AvailablePart currentPartInfo = PartLoader.getPartInfoByName(part.name.Replace("(Clone)", ""));
-            _initCost = currentPartInfo.cost;
-            if (state == StartState.Editor)
+            try
             {
-                return;
-            }
-            if (part.Resources.Contains("Quality"))
-            {
-                quality = (part.Resources["Quality"].amount / (part.Resources["Quality"].maxAmount / 100)) / 100;
-            }
+                _state = state;
+                AvailablePart currentPartInfo = PartLoader.getPartInfoByName(part.name.Replace("(Clone)", ""));
+                _initCost = currentPartInfo.cost;
+                if (state == StartState.Editor)
+                {
+                    return;
+                }
+                if (part.Resources.Contains("Quality"))
+                {
+                    quality = (part.Resources["Quality"].amount / (part.Resources["Quality"].maxAmount / 100)) / 100;
+                }
 
-            if (basicWear.findCurveMinMaxInterations == 0)
-            {
-                basicWear = new FloatCurve();
-                basicWear.Add(0.1f, 0.69f);
-                basicWear.Add(0.5f, 0.000181f);
-                basicWear.Add(1f, 0.00001f);
-            }                
-            _currentWear = basicWear.Evaluate((float)quality);
-            _lastUpdateTime = vessel.missionTime;
-            _sun = Planetarium.fetch.Sun;
-            //gameObject.AddComponent(typeof(LineRenderer));
+                if (basicWear.findCurveMinMaxInterations == 0)
+                {
+                    basicWear = new FloatCurve();
+                    basicWear.Add(0.1f, 0.69f);
+                    basicWear.Add(0.5f, 0.000181f);
+                    basicWear.Add(1f, 0.00001f);
+                }
+                _currentWear = basicWear.Evaluate((float)quality);
+                _lastUpdateTime = vessel.missionTime;
+                _sun = Planetarium.fetch.Sun;
+                //gameObject.AddComponent(typeof(LineRenderer));
 
-            if (part.Modules.Contains("ModuleCommand"))
-            {
-                _command = (ModuleCommand)part.Modules["ModuleCommand"];
-                GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _command = " + _command.name);
+                if (part.Modules.Contains("ModuleCommand"))
+                {
+                    _command = (ModuleCommand)part.Modules["ModuleCommand"];
+                    GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _command = " + _command.name);
+                }
+
+                if (part.Modules.Contains("ModuleReactionWheel"))
+                {
+                    _reactionWheel = (ModuleReactionWheel)part.Modules["ModuleReactionWheel"];
+                    GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _reactionWheel = " + _reactionWheel.name);
+                }
+
+                if (part.Modules.Contains("ModuleEngines"))
+                {
+                    _engine = (ModuleEngines)part.Modules["ModuleEngines"];
+                    GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _engine = " + _engine.name);
+                }
+                if (part.Modules.Contains("ModuleScienceExperiment"))
+                {
+                    _scienceExperiment = (ModuleScienceExperiment)part.Modules["ModuleScienceExperiment"];
+                    GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _scienceExperiment = " + _scienceExperiment.name);
+                }
+
+                checkStatus();
+                setEventLabel();
             }
-
-            if (part.Modules.Contains("ModuleReactionWheel"))
+            catch (Exception ex)
             {
-                _reactionWheel = (ModuleReactionWheel)part.Modules["ModuleReactionWheel"];
-                GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _reactionWheel = " + _reactionWheel.name);
+                GSA.Durability.Debug.LogError("GSA Durability: [OnStart]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [OnStart]: StackTrace: " + ex.StackTrace);
             }
-
-            if (part.Modules.Contains("ModuleEngines"))
-            {
-                _engine = (ModuleEngines)part.Modules["ModuleEngines"];
-                GSA.Durability.Debug.Log("GSA Durability: [OnStart]: _engine = " + _engine.name);
-            }
-
-            checkStatus();
-            setEventLabel();          
 
             GSA.Durability.Debug.Log("GSA Durability: [OnStart]: quality:" + quality.ToString());
             GSA.Durability.Debug.Log("GSA Durability: [OnStart]: damageRate: " + _currentWear.ToString("0.000000"));
@@ -391,7 +405,7 @@ namespace GSA.Durability
                 GSA.Durability.Debug.Log("GSA Durability: [OnLoad]: lastUpdateTime: " + _lastUpdateTime.ToString());
             }
             catch { }
-        }        
+        }
 
         public void OnCollisionEnter(Collision collision)
         {
@@ -413,7 +427,7 @@ namespace GSA.Durability
                         baseDamage /= 2;
                         GSA.Durability.Debug.Log("GSA Durability: [ModuleDockingNode]: ModuleLandingGear baseDamage: " + baseDamage.ToString("0.0000"));
                     }
-                    
+
                     if (collision.relativeVelocity.magnitude > baseValue * 90)
                     {
                         reduce = (collision.relativeVelocity.magnitude / baseValue) * baseDamage;
@@ -441,7 +455,7 @@ namespace GSA.Durability
         private float calculateCost()
         {
             double newCost = 0;
-            if(quality == 0.5)
+            if (quality == 0.5)
             {
                 newCost = (double)_initCost;
             }
@@ -454,8 +468,8 @@ namespace GSA.Durability
                 newCost = (double)_initCost / Math.Pow((double)_initCost, (.5d - quality));
             }
             newCost -= (double)_initCost;
-            GSA.Durability.Debug.Log("GSA Durability: [calculateCost]: newCost: " + newCost.ToString());
-            GSA.Durability.Debug.Log("GSA Durability: [calculateCost]: _initCost: " + _initCost.ToString());
+            //GSA.Durability.Debug.Log("GSA Durability: [calculateCost]: newCost: " + newCost.ToString());
+            //GSA.Durability.Debug.Log("GSA Durability: [calculateCost]: _initCost: " + _initCost.ToString());
             return (float)newCost;
         }
 
@@ -467,15 +481,16 @@ namespace GSA.Durability
             _displayDurability = GetDurabilityPercent();
             displayTemperature = part.temperature.ToString("0.00");
             try
-            {              
+            {
                 if (part.Resources.Contains("Durability"))
                 {
                     if (part.Resources["Durability"].amount <= 0 && canExplode)
                     {
                         part.explode();
+                        GSA.Durability.Debug.Log("GSA Durability: [checkStatus]: explode[canExplode] " + part.name);
                     }
                     else
-                    {      
+                    {
                         if (part.Resources["Durability"].amount <= minDurability && !part.frozen)
                         {
                             if (_reactionWheel != null)
@@ -522,15 +537,17 @@ namespace GSA.Durability
                             }
                             GSA.Durability.Debug.Log("GSA Durability: [checkStatus]: unfreeze Part " + part.name);
                         }
-                        if(part.Resources["Durability"].amount <= 0)
+                        if (part.Resources["Durability"].amount <= 0)
                         {
-                            if(vessel.staticPressure >= maxPressure)
+                            if (vessel.staticPressure >= maxPressure)
                             {
                                 part.explode();
+                                GSA.Durability.Debug.Log("GSA Durability: [checkStatus]: explode[Pressure] " + part.name);
                             }
                             if (_engine != null && quality == 0.01d)
                             {
                                 part.explode();
+                                GSA.Durability.Debug.Log("GSA Durability: [checkStatus]: explode[engine] " + part.name);
                             }
                         }
                     }
@@ -550,7 +567,7 @@ namespace GSA.Durability
                 return;
             try
             {
-                if (_displayDurability < 100 && canRepair && quality > 0.01 && (maxRepair > 0 || maxRepair == -1))
+                if (_displayDurability < 99 && canRepair && quality > 0.01 && (maxRepair > 0 || maxRepair == -1))
                 {
                     Events["RepairDamage"].guiName = "Repair";
                 }
@@ -569,11 +586,12 @@ namespace GSA.Durability
                     Events["RepairDamage"].guiName = "No Damage";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GSA.Durability.Debug.LogError("GSA Durability: [setEventLabel]: Message: " + ex.Message);
                 GSA.Durability.Debug.LogError("GSA Durability: [setEventLabel]: Source: " + ex.Source);
                 GSA.Durability.Debug.LogError("GSA Durability: [setEventLabel]: StackTrace: " + ex.StackTrace);
+                GSA.Durability.Debug.LogError(ex.Data);
             }
         }
 
@@ -582,157 +600,58 @@ namespace GSA.Durability
         /// </summary>
         private void reduceDurability()
         {
-            double reduce = 0;
+            _finalReduce = 0;
             try
-            {                
+            {
                 if (part.Resources.Contains("Durability"))
                 {
                     if (part.Resources["Durability"].amount > 0)
                     {
                         // Default
-                        reduce = _currentWear;
+                        _finalReduce = _currentWear;
+                        double additionalReduce = 0;
 
                         //Temperature
-                        double TempMutli = 0;
-                        TempMutli = idealTemp.Evaluate(part.temperature);
-                        TempMutli = (TempMutli > 1) ? TempMutli : 1;
-                        reduce *= TempMutli;
-                        displayTempM = TempMutli.ToString("0.0000");
+                        additionalReduce += getReduceTemperature();
 
                         //GeeForce
-                        double GeeForceMutli = 1;
-                        if (vessel.geeForce > 1 && vessel.geeForce < 9)
-                        {
-                            GeeForceMutli = (vessel.geeForce * vessel.geeForce);
-                        }
-                        else if (vessel.geeForce >= 9)
-                        {
-                            GeeForceMutli = ((vessel.geeForce * vessel.geeForce) * 2);
-                        }
-                        GeeForceMutli = (GeeForceMutli > 1) ? GeeForceMutli : 1;
-                        reduce *= GeeForceMutli;
-                        displayGeeForce = GeeForceMutli.ToString("0.0000");
+                        additionalReduce += getReduceGeeForce();
 
                         //Pressure
-                        double pressureMulti = 0;
-                        float pressure = 1f;
-                        pressure = Convert.ToSingle(vessel.staticPressure);
-                        pressureMulti = idealPressure.Evaluate(pressure);
-                        pressureMulti = (pressureMulti > 1) ? pressureMulti : 1;
-                        reduce *= pressureMulti;
-                        displayPressure = pressureMulti.ToString("0.0000");
+                        additionalReduce += getReducePressure();
 
                         //Engine
-                        double EngineMutli = 1;                        
-                        if(part.Modules.Contains("ModuleEngines"))
-                        { 
-                            ModuleEngines engine = (ModuleEngines)part.Modules["ModuleEngines"];
-                            if (!engine.flameout && !engine.engineShutdown)
-                            {
-                                EngineMutli = (engineWear * engineWear) * (engine.requestedThrust / engine.maxThrust + 1);
-                                EngineMutli = (EngineMutli > 1) ? EngineMutli : 1;
-                                reduce *= EngineMutli;
-                            }
-                        }
-                        displayEngine = EngineMutli.ToString("0.0000");
+                        additionalReduce += getReduceEngine();
 
                         //ScienceExperiment ModuleScienceExperiment (Not Multiply, fixed Damage)
-                        if (part.Modules.Contains("ModuleScienceExperiment"))
+                        getReduceExperiment();
+
+                        //Reaction Wheels
+                        /*if (_reactionWheel != null)
                         {
-                            ModuleScienceExperiment scienceExperiment = (ModuleScienceExperiment)part.Modules["ModuleScienceExperiment"];
-                            if (scienceExperiment.Deployed && !_expDeployed)
-                            {
-                                _expDeployed = true;
-                                GSA.Durability.Debug.Log("GSA Durability: [reduceDurability]: scienceExperiment: ");
-                                
-                                double experimentDamage = (part.Resources["Durability"].maxAmount / 100) * UnityEngine.Random.Range(5, 35);
-                                part.Resources["Durability"].amount -= experimentDamage;
-                                displayExp = EngineMutli.ToString("0.0000");
-                            }
-                        }
+                            displayReactionWheel = "YT" + _reactionWheel.YawTorque.ToString("0.000")
+                                + "RT" + _reactionWheel.RollTorque.ToString("0.000")
+                                + "PT" + _reactionWheel.PitchTorque.ToString("0.000");
+                        }*/
 
                         //radiation
-                        double radiationMutli = 1;
-                        Transform target = _sun.transform;
-                        RaycastHit hit;
-                        displaySun = "";
-                                                
-                        //LineRenderer line = (LineRenderer)gameObject.GetComponent(typeof(LineRenderer));
-                        //line.SetVertexCount(2);
-                        //line.SetWidth(0.1f, 0.1f);
+                        //additionalReduce += getReduceRadiation(reduce);
 
-                        float sunDis = Convert.ToSingle(Vector3d.Distance(part.gameObject.transform.position, _sun.transform.position));
-                        //if (Physics.Raycast(part.gameObject.transform.position, target.position, out hit, sunDis))
-                        if (Physics.Linecast(part.gameObject.transform.position, target.position, out hit))
-                        {
-                            displaySun = "c: " + (hit.collider != null ? hit.collider.name : "N/A") + "; dis: " + hit.distance.ToString("0.0000");
-                            
-                            //line.SetColors(Color.red, Color.red);
-                            //line.SetPosition(0, part.gameObject.transform.position);
-                            //line.SetPosition(1, hit.point);
-                        }
-                        else
-                        {
-                            try
-                            {
-                                double atmoAbsob = (vessel.staticPressure > 1.05 ? 0 : 1.05 - vessel.staticPressure);
-                                radiationMutli = sunDis * 1.4995217994990961392430031278165e-9;
-                                radiationMutli *= atmoAbsob;
-                                //displaySun += ";" + radiationMutli.ToString("0.0000"); 
-                                radiationMutli -= radiationAbsorption;
-                                displaySun += radiationMutli.ToString("0.0000");
-                                //reduce *= (radiationMutli > 0 ? radiationMutli : 1);
+                        _finalReduce += additionalReduce;
+                        displayDamage = _finalReduce.ToString("0.000000");
 
-                                //line.SetColors(Color.green, Color.green);
-                                //line.SetPosition(0, part.gameObject.transform.position);
-                                //line.SetPosition(1, _sun.transform.position);
-                                //line.SetWidth(0.01f, 0.01f);
-                            }
-                            catch (Exception ex)
-                            {
-                                //displaySun = "Error drow line";
-                                GSA.Durability.Debug.LogError("GSA Durability: [reduceDurability]: Message: " + ex.Message);
-                            }
-                        }
-                        //displaySun = radiationMutli.ToString("0.0000"); 
-                 
                         //DeltaTime
-                        reduce *= TimeWarp.fixedDeltaTime;
-
-                        displayDamage = reduce.ToString("0.000000");
+                        _finalReduce *= TimeWarp.fixedDeltaTime;
                         displayDamage += " B: " + _currentWear.ToString("0.000000");
-                        
-                        double secondsToZero = part.Resources["Durability"].amount / (reduce * (1 / TimeWarp.fixedDeltaTime));
-                    
-                        double KerbalYearSec = (426.08 * 6 * 60 * 60);
-                        double KerbalDaySec = (6 * 60 * 60);
-                        double KerbalHourSec = (60 * 60);
 
-                        int years = (int)Math.Floor(secondsToZero / KerbalYearSec);
-                        secondsToZero -= years * KerbalYearSec;
+                        displayTime = getFormatedExpirationDate();
 
-                        int days = (int)Math.Floor(secondsToZero / KerbalDaySec);
-                        secondsToZero -= days * KerbalDaySec;
-
-                        int hours = (int)Math.Floor(secondsToZero / KerbalHourSec);
-                        secondsToZero -= hours * KerbalHourSec;
-
-                        int minutes = (int)Math.Floor(secondsToZero / 60);
-                        secondsToZero -= minutes * 60;
-
-                        int seconds = (int)Math.Floor(secondsToZero);
-
-                        displayTime = "T+ " + ((years > 0) ? "y" + years.ToString("D2") + ", " : "") +
-                            ((days > 0) ? "d" + days.ToString("D2") + ", " : "") +
-                            hours.ToString("D2") + ":" + 
-                            minutes.ToString("D2") + ":" + 
-                            seconds.ToString("D2");
-                        if (reduce > 0.0)
+                        if (_finalReduce > 0.0)
                         {
                             if (_isInit && vessel.missionTime > 0.01)
                             {
                                 _lastUpdateTime = vessel.missionTime;
-                                lastReduceRange = reduce * (1 / TimeWarp.fixedDeltaTime);
+                                lastReduceRange = _finalReduce * (1 / TimeWarp.fixedDeltaTime);
                             }
                         }
                     }
@@ -740,17 +659,18 @@ namespace GSA.Durability
                     {
                         part.Resources["Durability"].amount = 0;
                     }
-                    
-                    part.Resources["Durability"].amount -= reduce;
+
+                    part.Resources["Durability"].amount -= _finalReduce;
                 }
             }
             catch (Exception ex)
             {
                 GSA.Durability.Debug.LogError("GSA Durability: [reduceDurability]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [reduceDurability]: StackTrace: " + ex.StackTrace);
             }
         }
-        
-        
+
+
         /// <summary>
         /// Get the current Durability as percent
         /// </summary>
@@ -767,8 +687,279 @@ namespace GSA.Durability
                 GSA.Durability.Debug.Log("KspDeMod [GetDurabilityPercent]: Resource Durability not Found");
             }
             return percent * 100;
-        }        
+        }
+
+        /// <summary>
+        /// Get the xxpiration date
+        /// </summary>
+        /// <returns>Seconds</returns>
+        public double getExpirationDate()
+        {
+            try
+            {
+                if (part.Resources.Contains("Durability"))
+                {
+                    return part.Resources["Durability"].amount / (_finalReduce * (1 / TimeWarp.fixedDeltaTime));
+                }
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getExpirationDate]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getExpirationDate]: StackTrace: " + ex.StackTrace);
+                return -1;
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Get the expiration date Formated
+        /// </summary>
+        /// <returns>String</returns>
+        public string getFormatedExpirationDate()
+        {
+            try
+            {
+                double secondsToZero = getExpirationDate();
+                double KerbalYearSec = (426.08 * 6 * 60 * 60);
+                double KerbalDaySec = (6 * 60 * 60);
+                double KerbalHourSec = (60 * 60);
+
+                int years = (int)Math.Floor(secondsToZero / KerbalYearSec);
+                secondsToZero -= years * KerbalYearSec;
+
+                int days = (int)Math.Floor(secondsToZero / KerbalDaySec);
+                secondsToZero -= days * KerbalDaySec;
+
+                int hours = (int)Math.Floor(secondsToZero / KerbalHourSec);
+                secondsToZero -= hours * KerbalHourSec;
+
+                int minutes = (int)Math.Floor(secondsToZero / 60);
+                secondsToZero -= minutes * 60;
+
+                int seconds = (int)Math.Floor(secondsToZero);
+
+                return "T+ " + ((years > 0) ? "y" + years.ToString("D2") + ", " : "") +
+                    ((days > 0) ? "d" + days.ToString("D2") + ", " : "") +
+                    hours.ToString("D2") + ":" +
+                    minutes.ToString("D2") + ":" +
+                    seconds.ToString("D2");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getFormatedExpirationDate]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getFormatedExpirationDate]: StackTrace: " + ex.StackTrace);
+                return "ERROR";
+            }
+        }
 
         #endregion //Private methods
+
+        #region Reduce methods
+
+        /// <summary>
+        /// Temperatur durability reduction
+        /// </summary>
+        /// <returns>additional reduction</returns>
+        private double getReduceTemperature()
+        {
+            double additionalReduce = 0;
+            try
+            {
+                double TempMutli = 0;
+                TempMutli = idealTemp.Evaluate(part.temperature);
+                TempMutli = (TempMutli > 1) ? TempMutli : 1;
+                //reduce *= TempMutli;
+                additionalReduce += (_currentWear * TempMutli) - _currentWear;
+                displayTempM = TempMutli.ToString("0.0000");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceTemperature]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceTemperature]: StackTrace: " + ex.StackTrace);
+            }
+            return additionalReduce;
+        }
+
+        /// <summary>
+        /// GForce durability reduction
+        /// </summary>
+        /// <returns>additional reduction</returns>
+        private double getReduceGeeForce()
+        {
+            double additionalReduce = 0;
+            try
+            {
+                double GeeForceMutli = 1;
+                if (vessel.geeForce > 1 && vessel.geeForce < 9)
+                {
+                    GeeForceMutli = (vessel.geeForce * vessel.geeForce);
+                }
+                else if (vessel.geeForce >= 9)
+                {
+                    GeeForceMutli = ((vessel.geeForce * vessel.geeForce) * 2);
+                }
+                GeeForceMutli = (GeeForceMutli > 1) ? GeeForceMutli : 1;
+                //reduce *= GeeForceMutli;
+                additionalReduce += (_currentWear * GeeForceMutli) - _currentWear;
+                displayGeeForce = GeeForceMutli.ToString("0.0000");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceGeeForce]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceGeeForce]: StackTrace: " + ex.StackTrace);
+            }
+            return additionalReduce;
+        }
+
+        /// <summary>
+        /// Pressure durability reduction
+        /// </summary>
+        /// <param name="reduce">basic reduction</param>
+        /// <returns>additional reduction</returns>
+        private double getReducePressure()
+        {
+            double additionalReduce = 0;
+            try
+            {
+                double pressureMulti = 0;
+                float pressure = 1f;
+                pressure = Convert.ToSingle(vessel.staticPressure);
+                pressureMulti = idealPressure.Evaluate(pressure);
+                pressureMulti = (pressureMulti > 1) ? pressureMulti : 1;
+                //reduce *= pressureMulti;
+                additionalReduce += (_currentWear * pressureMulti) - _currentWear;
+                displayPressure = pressureMulti.ToString("0.0000");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReducePressure]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReducePressure]: StackTrace: " + ex.StackTrace);
+            }
+            return additionalReduce;
+        }
+
+        /// <summary>
+        /// Engine durability reduction
+        /// </summary>
+        /// <param name="reduce">basic reduction</param>
+        /// <returns>additional reduction</returns>
+        private double getReduceEngine()
+        {
+            double additionalReduce = 0;
+            try
+            {
+                double EngineMutli = 1;
+                if (_engine != null)
+                {
+                    if (!_engine.flameout && !_engine.engineShutdown)
+                    {
+                        EngineMutli = (engineWear * engineWear) * (_engine.requestedThrust / _engine.maxThrust + 1);
+                        EngineMutli = (EngineMutli > 1) ? EngineMutli : 1;
+                        //reduce *= EngineMutli;
+                        additionalReduce += (_currentWear * EngineMutli) - _currentWear;
+                    }
+                }
+                displayEngine = EngineMutli.ToString("0.0000");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceEngine]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceEngine]: StackTrace: " + ex.StackTrace);
+            }
+            return additionalReduce;
+        }
+
+        /// <summary>
+        /// Experiment durability reduction
+        /// </summary>
+        private void getReduceExperiment()
+        {
+            try
+            {
+                //ScienceExperiment ModuleScienceExperiment (Not Multiply, fixed Damage)
+                if (_scienceExperiment != null)
+                {
+                    if (_scienceExperiment.Deployed && !_expDeployed)
+                    {
+                        _expDeployed = true;
+                        GSA.Durability.Debug.Log("GSA Durability: [getReduceExperiment]");
+
+                        double experimentDamage = (part.Resources["Durability"].maxAmount / 100) * UnityEngine.Random.Range(5, 35);
+                        part.Resources["Durability"].amount -= experimentDamage;
+                        displayExp = experimentDamage.ToString("0.0000");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceExperiment]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceExperiment]: StackTrace: " + ex.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// Engine durability reduction
+        /// </summary>
+        /// <param name="reduce">basic reduction</param>
+        /// <returns>additional reduction</returns>
+        private double getReduceRadiation()
+        {
+            double additionalReduce = 0;
+            try
+            {
+                double radiationMutli = 1;
+                Transform target = _sun.transform;
+                RaycastHit hit;
+                displaySun = "";
+
+                //LineRenderer line = (LineRenderer)gameObject.GetComponent(typeof(LineRenderer));
+                //line.SetVertexCount(2);
+                //line.SetWidth(0.1f, 0.1f);
+
+                float sunDis = Convert.ToSingle(Vector3d.Distance(part.gameObject.transform.position, _sun.transform.position));
+                //if (Physics.Raycast(part.gameObject.transform.position, target.position, out hit, sunDis))
+                if (Physics.Linecast(part.gameObject.transform.position, target.position, out hit))
+                {
+                    displaySun = "c: " + (hit.collider != null ? hit.collider.name : "N/A") + "; dis: " + hit.distance.ToString("0.0000");
+
+                    //line.SetColors(Color.red, Color.red);
+                    //line.SetPosition(0, part.gameObject.transform.position);
+                    //line.SetPosition(1, hit.point);
+                }
+                else
+                {
+                    try
+                    {
+                        double atmoAbsob = (vessel.staticPressure > 1.05 ? 0 : 1.05 - vessel.staticPressure);
+                        radiationMutli = sunDis * 1.4995217994990961392430031278165e-9;
+                        radiationMutli *= atmoAbsob;
+                        //displaySun += ";" + radiationMutli.ToString("0.0000"); 
+                        radiationMutli -= radiationAbsorption;
+                        displaySun += radiationMutli.ToString("0.0000");
+                        //reduce *= (radiationMutli > 0 ? radiationMutli : 1);
+                        additionalReduce += (_currentWear * radiationMutli) - _currentWear;
+
+                        //line.SetColors(Color.green, Color.green);
+                        //line.SetPosition(0, part.gameObject.transform.position);
+                        //line.SetPosition(1, _sun.transform.position);
+                        //line.SetWidth(0.01f, 0.01f);
+                    }
+                    catch (Exception ex)
+                    {
+                        //displaySun = "Error drow line";
+                        GSA.Durability.Debug.LogError("GSA Durability: [getReduceRadiation]: Message: " + ex.Message);
+                    }
+                }
+                displaySun = radiationMutli.ToString("0.0000");
+            }
+            catch (Exception ex)
+            {
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceRadiation]: Message: " + ex.Message);
+                GSA.Durability.Debug.LogError("GSA Durability: [getReduceRadiation]: StackTrace: " + ex.StackTrace);
+            }
+            return additionalReduce;
+        }
+
+        #endregion //Reduce methods
     }
 }
