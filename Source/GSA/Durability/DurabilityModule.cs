@@ -194,7 +194,7 @@ namespace GSA.Durability
 
         #region KSPEvent
 
-        [KSPEvent(guiName = "No Damage", guiActiveUnfocused = true, externalToEVAOnly = true, guiActive = false, unfocusedRange = 4f)]
+        [KSPEvent(guiName = "No Damage (Durability)", guiActiveUnfocused = true, externalToEVAOnly = true, guiActive = false, unfocusedRange = 4f)]
         public void RepairDamage()
         {
             if (Events == null || !canRepair || maxRepair == 0)
@@ -768,7 +768,6 @@ namespace GSA.Durability
                 double TempMutli = 0;
                 TempMutli = idealTemp.Evaluate(part.temperature);
                 TempMutli = (TempMutli > 1) ? TempMutli : 1;
-                //reduce *= TempMutli;
                 additionalReduce += (_currentWear * TempMutli) - _currentWear;
                 displayTempM = TempMutli.ToString("0.0000");
             }
@@ -790,16 +789,16 @@ namespace GSA.Durability
             try
             {
                 double GeeForceMutli = 1;
-                if (vessel.geeForce > 1 && vessel.geeForce < 9)
+                /*if (vessel.geeForce > 1 && vessel.geeForce < 9)
                 {
                     GeeForceMutli = (vessel.geeForce * vessel.geeForce);
                 }
                 else if (vessel.geeForce >= 9)
                 {
                     GeeForceMutli = ((vessel.geeForce * vessel.geeForce) * 2);
-                }
+                }*/
+                GeeForceMutli = Math.Pow(vessel.geeForce / 2, vessel.geeForce / 2.2);
                 GeeForceMutli = (GeeForceMutli > 1) ? GeeForceMutli : 1;
-                //reduce *= GeeForceMutli;
                 additionalReduce += (_currentWear * GeeForceMutli) - _currentWear;
                 displayGeeForce = GeeForceMutli.ToString("0.0000");
             }
@@ -826,7 +825,6 @@ namespace GSA.Durability
                 pressure = Convert.ToSingle(vessel.staticPressure);
                 pressureMulti = idealPressure.Evaluate(pressure);
                 pressureMulti = (pressureMulti > 1) ? pressureMulti : 1;
-                //reduce *= pressureMulti;
                 additionalReduce += (_currentWear * pressureMulti) - _currentWear;
                 displayPressure = pressureMulti.ToString("0.0000");
             }
@@ -853,9 +851,9 @@ namespace GSA.Durability
                 {
                     if (!_engine.flameout && !_engine.engineShutdown)
                     {
-                        EngineMutli = (engineWear * engineWear) * (_engine.requestedThrust / _engine.maxThrust + 1);
+                        //EngineMutli = engineWear * (_engine.requestedThrust / _engine.maxThrust + 1);
+                        EngineMutli = Math.Pow(engineWear, (_engine.requestedThrust / _engine.maxThrust)*100);
                         EngineMutli = (EngineMutli > 1) ? EngineMutli : 1;
-                        //reduce *= EngineMutli;
                         additionalReduce += (_currentWear * EngineMutli) - _currentWear;
                     }
                 }
@@ -884,7 +882,10 @@ namespace GSA.Durability
                         _expDeployed = true;
                         GSA.Durability.Debug.Log("GSA Durability: [getReduceExperiment]");
 
-                        double experimentDamage = (part.Resources["Durability"].maxAmount / 100) * UnityEngine.Random.Range(5, 35);
+                        int minRange = (int)Math.Round(5 * (2 - quality));
+                        int maxRange = (int)Math.Round(35 * (2 - quality));
+
+                        double experimentDamage = (part.Resources["Durability"].maxAmount / 100) * UnityEngine.Random.Range(minRange, maxRange);
                         part.Resources["Durability"].amount -= experimentDamage;
                         displayExp = experimentDamage.ToString("0.0000");
                     }
