@@ -1,0 +1,3 @@
+--- Important note before installing these LowRes Textures ---
+
+Before you replace the normal textures with the LowRes Textures, BACK-UP the originalfiles! Otherwise, if you want to switch back to the normal Textures, you will have to re-download the full mod. 
