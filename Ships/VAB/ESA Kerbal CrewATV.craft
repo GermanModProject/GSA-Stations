@@ -4,9 +4,9 @@ description =
 type = VAB
 PART
 {
-	part = KerbalATVProbe_4294745562
+	part = ATV.CrewCabin_4294794258
 	partName = Part
-	pos = -0.03180598,22.24327,0.03848028
+	pos = 0,10,0
 	rot = 0,0,0,1
 	attRot = 0,0,0,1
 	mir = 1,1,1
@@ -16,1295 +16,19 @@ PART
 	sqor = -1
 	attm = 0
 	modCost = 0
-	link = SciFiDockingPort_4294745460
-	link = RCSBlock_4294745248
-	link = RCSBlock_4294745198
-	link = RCSBlock_4294745148
-	link = RCSBlock_4294745098
-	link = ATV.CrewCabin_4294736510
-	attN = top,SciFiDockingPort_4294745460
-	attN = bottom,ATV.CrewCabin_4294736510
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleCommand
-		isEnabled = True
-		controlSrcStatusText = 
-		EVENTS
-		{
-			MakeReference
-			{
-				active = True
-				guiActive = True
-				guiIcon = Control From Here
-				guiName = Control From Here
-				category = Control From Here
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			RenameVessel
-			{
-				active = True
-				guiActive = True
-				guiIcon = Rename Vessel
-				guiName = Rename Vessel
-				category = Rename Vessel
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleReactionWheel
-		isEnabled = True
-		stateString = Active
-		WheelState = Active
-		EVENTS
-		{
-			OnToggle
-			{
-				active = True
-				guiActive = True
-				guiIcon = Toggle Torque
-				guiName = Toggle Torque
-				category = Toggle Torque
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			Activate
-			{
-				actionGroup = None
-			}
-			Deactivate
-			{
-				actionGroup = None
-			}
-			Toggle
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = ModuleSAS
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleJettison
-		isEnabled = True
-		EVENTS
-		{
-			Jettison
-			{
-				active = False
-				guiActive = True
-				guiIcon = Jettison
-				guiName = Jettison
-				category = Jettison
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			JettisonAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = ModuleJettison
-		isEnabled = True
-		EVENTS
-		{
-			Jettison
-			{
-				active = False
-				guiActive = True
-				guiIcon = Jettison
-				guiName = Jettison
-				category = Jettison
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			JettisonAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = FlagDecal
-		isEnabled = True
-		flagDisplayed = True
-		EVENTS
-		{
-			ToggleFlag
-			{
-				active = True
-				guiActive = False
-				guiActiveEditor = True
-				guiIcon = ToggleFlag
-				guiName = ToggleFlag
-				category = ToggleFlag
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleTripLogger
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		Surfaced
-		{
-		}
-		Flew
-		{
-		}
-		FlewBy
-		{
-		}
-		Orbited
-		{
-		}
-		SubOrbited
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = ElectricCharge
-		amount = 150
-		maxAmount = 150
-		flowState = True
-		isTweakable = True
-		hideFlow = False
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = SciFiDockingPort_4294745460
-	partName = Part
-	pos = -0.03180598,22.9569,0.03848028
-	rot = 0,0,0,1
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 0
-	modCost = 0
-	attN = bottom,KerbalATVProbe_4294745562
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleDockingNode
-		isEnabled = True
-		state = Ready
-		dockUId = 0
-		dockNodeIdx = 0
-		EVENTS
-		{
-			Undock
-			{
-				active = False
-				guiActive = True
-				guiIcon = Undock
-				guiName = Undock
-				category = Undock
-				guiActiveUnfocused = True
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			UndockSameVessel
-			{
-				active = False
-				guiActive = True
-				guiIcon = Undock
-				guiName = Undock
-				category = Undock
-				guiActiveUnfocused = True
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Decouple
-			{
-				active = False
-				guiActive = True
-				guiIcon = Decouple Node
-				guiName = Decouple Node
-				category = Decouple Node
-				guiActiveUnfocused = True
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			SetAsTarget
-			{
-				active = True
-				guiActive = False
-				guiIcon = Set as Target
-				guiName = Set as Target
-				category = Set as Target
-				guiActiveUnfocused = True
-				unfocusedRange = 200
-				externalToEVAOnly = False
-			}
-			UnsetTarget
-			{
-				active = True
-				guiActive = False
-				guiIcon = Unset Target
-				guiName = Unset Target
-				category = Unset Target
-				guiActiveUnfocused = True
-				unfocusedRange = 200
-				externalToEVAOnly = False
-			}
-			EnableXFeed
-			{
-				active = False
-				guiActive = True
-				guiIcon = Enable Crossfeed
-				guiName = Enable Crossfeed
-				category = Enable Crossfeed
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			DisableXFeed
-			{
-				active = False
-				guiActive = True
-				guiIcon = Disable Crossfeed
-				guiName = Disable Crossfeed
-				category = Disable Crossfeed
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			MakeReferenceTransform
-			{
-				active = True
-				guiActive = True
-				guiIcon = Control from Here
-				guiName = Control from Here
-				category = Control from Here
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			UndockAction
-			{
-				actionGroup = None
-			}
-			DecoupleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = ModuleAnimateGeneric
-		isEnabled = True
-		status = Locked
-		animSwitch = True
-		animTime = 0
-		animSpeed = 1
-		EVENTS
-		{
-			Toggle
-			{
-				active = True
-				guiActive = True
-				guiActiveEditor = True
-				guiIcon = Toggle
-				guiName = Open Port
-				category = Toggle
-				guiActiveUnfocused = True
-				unfocusedRange = 5
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = RCSBlock_4294745248
-	partName = Part
-	pos = -1.533405,21.71846,0.03922264
-	rot = -4.179531E-09,0,6.376759E-08,-1
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	modCost = 0
-	sym = RCSBlock_4294745198
-	sym = RCSBlock_4294745148
-	sym = RCSBlock_4294745098
-	srfN = srfAttach,KerbalATVProbe_4294745562
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleRCS
-		isEnabled = True
-		isEnabled = True
-		EVENTS
-		{
-			Disable
-			{
-				active = True
-				guiActive = True
-				guiIcon = Disable RCS Port
-				guiName = Disable RCS Port
-				category = Disable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Enable
-			{
-				active = False
-				guiActive = True
-				guiIcon = Enable RCS Port
-				guiName = Enable RCS Port
-				category = Enable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = RCSBlock_4294745198
-	partName = Part
-	pos = -0.03106371,21.71846,1.540079
-	rot = 4.213512E-08,-0.7071068,4.804587E-08,-0.7071068
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	modCost = 0
-	sym = RCSBlock_4294745248
-	sym = RCSBlock_4294745148
-	sym = RCSBlock_4294745098
-	srfN = srfAttach,KerbalATVProbe_4294745562
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleRCS
-		isEnabled = True
-		isEnabled = True
-		EVENTS
-		{
-			Disable
-			{
-				active = True
-				guiActive = True
-				guiIcon = Disable RCS Port
-				guiName = Disable RCS Port
-				category = Disable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Enable
-			{
-				active = False
-				guiActive = True
-				guiIcon = Enable RCS Port
-				guiName = Enable RCS Port
-				category = Enable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = RCSBlock_4294745148
-	partName = Part
-	pos = 1.469792,21.71846,0.03773779
-	rot = 6.376759E-08,-1,4.179528E-09,4.371139E-08
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	modCost = 0
-	sym = RCSBlock_4294745248
-	sym = RCSBlock_4294745198
-	sym = RCSBlock_4294745098
-	srfN = srfAttach,KerbalATVProbe_4294745562
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleRCS
-		isEnabled = True
-		isEnabled = True
-		EVENTS
-		{
-			Disable
-			{
-				active = True
-				guiActive = True
-				guiIcon = Disable RCS Port
-				guiName = Disable RCS Port
-				category = Disable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Enable
-			{
-				active = False
-				guiActive = True
-				guiIcon = Enable RCS Port
-				guiName = Enable RCS Port
-				category = Enable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = RCSBlock_4294745098
-	partName = Part
-	pos = -0.03254843,21.71846,-1.463118
-	rot = 4.804587E-08,-0.7071068,-4.213512E-08,0.7071068
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	modCost = 0
-	sym = RCSBlock_4294745248
-	sym = RCSBlock_4294745198
-	sym = RCSBlock_4294745148
-	srfN = srfAttach,KerbalATVProbe_4294745562
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	MODULE
-	{
-		name = ModuleRCS
-		isEnabled = True
-		isEnabled = True
-		EVENTS
-		{
-			Disable
-			{
-				active = True
-				guiActive = True
-				guiIcon = Disable RCS Port
-				guiName = Disable RCS Port
-				category = Disable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Enable
-			{
-				active = False
-				guiActive = True
-				guiIcon = Enable RCS Port
-				guiName = Enable RCS Port
-				category = Enable RCS Port
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = DummyPartModule
-		isEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = DurabilityModule
-		isEnabled = True
-		quality = 0.5
-		minDurability = 150
-		canExplode = False
-		canRepair = True
-		maxRepair = -1
-		lastReduceRange = 0
-		EVENTS
-		{
-			RepairDamage
-			{
-				active = True
-				guiActive = False
-				guiIcon = No Damage (Durability)
-				guiName = No Damage (Durability)
-				category = No Damage (Durability)
-				guiActiveUnfocused = True
-				unfocusedRange = 4
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = Quality
-		amount = 50
-		maxAmount = 100
-		flowState = True
-		isTweakable = True
-		hideFlow = True
-		flowMode = Both
-	}
-	RESOURCE
-	{
-		name = Durability
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = False
-		hideFlow = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = ATV.CrewCabin_4294736510
-	partName = Part
-	pos = -0.03180598,20.93757,0.03848028
-	rot = 0,0,0,1
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 0
-	modCost = 0
-	link = ATV.LandingLeg_4294735856
-	link = ATV.LandingLeg_4294734898
-	link = ATV.LandingLeg_4294734838
-	link = ATV.HeatShield_4294732546
-	attN = bottom,ATV.HeatShield_4294732546
-	attN = top,KerbalATVProbe_4294745562
+	link = ATV.LandingLeg_4294789696
+	link = ATV.LandingLeg_4294789534
+	link = ATV.LandingLeg_4294789474
+	link = ATV.HeatShield_4294786344
+	link = RCSBlock_4294781032
+	link = RCSBlock_4294779120
+	link = RCSBlock_4294778990
+	link = RCSBlock_4294778860
+	link = ATV.Parachute_4294775644
+	link = ATV.Parachute_4294774350
+	link = SciFiDockingPort_4294773682
+	attN = bottom,ATV.HeatShield_4294786344
+	attN = top,SciFiDockingPort_4294773682
 	EVENTS
 	{
 	}
@@ -1538,6 +262,78 @@ PART
 	}
 	MODULE
 	{
+		name = ModuleLight
+		isEnabled = True
+		isOn = False
+		lightR = 1
+		lightG = 1
+		lightB = 1
+		lightR_UIFlight
+		{
+			controlEnabled = True
+			minValue = 0
+			maxValue = 1
+			stepIncrement = 0.05
+		}
+		lightG_UIFlight
+		{
+			controlEnabled = True
+			minValue = 0
+			maxValue = 1
+			stepIncrement = 0.05
+		}
+		lightB_UIFlight
+		{
+			controlEnabled = True
+			minValue = 0
+			maxValue = 1
+			stepIncrement = 0.05
+		}
+		EVENTS
+		{
+			LightsOff
+			{
+				active = False
+				guiActive = True
+				guiActiveEditor = True
+				guiIcon = Lights Off
+				guiName = Lights Off
+				category = Lights Off
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			LightsOn
+			{
+				active = True
+				guiActive = True
+				guiActiveEditor = True
+				guiIcon = Lights On
+				guiName = Lights On
+				category = Lights On
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleLightAction
+			{
+				actionGroup = Light
+			}
+			LightOnAction
+			{
+				actionGroup = None
+			}
+			LightOffAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
 		name = DummyPartModule
 		isEnabled = True
 		EVENTS
@@ -1644,9 +440,9 @@ PART
 }
 PART
 {
-	part = ATV.LandingLeg_4294735856
+	part = ATV.LandingLeg_4294789696
 	partName = Part
-	pos = -0.03180606,17.87698,-0.8869103
+	pos = -8.186045E-08,6.939408,-0.9363744
 	rot = 3.090862E-08,0.7071068,3.090862E-08,-0.7071068
 	attRot = 0.7071067,0,0,-0.7071067
 	mir = 1,1,1
@@ -1656,9 +452,9 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = ATV.LandingLeg_4294734898
-	sym = ATV.LandingLeg_4294734838
-	srfN = srfAttach,ATV.CrewCabin_4294736510
+	sym = ATV.LandingLeg_4294789534
+	sym = ATV.LandingLeg_4294789474
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -1821,9 +617,9 @@ PART
 }
 PART
 {
-	part = ATV.LandingLeg_4294734898
+	part = ATV.LandingLeg_4294789534
 	partName = Part
-	pos = -0.8332177,17.87698,0.5011758
+	pos = -0.8109239,6.939408,0.4681874
 	rot = 4.222196E-08,-0.2588191,-1.131334E-08,-0.9659258
 	attRot = 0.7071067,0,0,-0.7071067
 	mir = 1,1,1
@@ -1833,9 +629,9 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = ATV.LandingLeg_4294735856
-	sym = ATV.LandingLeg_4294734838
-	srfN = srfAttach,ATV.CrewCabin_4294736510
+	sym = ATV.LandingLeg_4294789696
+	sym = ATV.LandingLeg_4294789474
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -1860,7 +656,7 @@ PART
 		{
 			LowerLeg
 			{
-				active = False
+				active = True
 				guiActive = True
 				guiIcon = Lower Legs
 				guiName = Lower Legs
@@ -1871,7 +667,7 @@ PART
 			}
 			RaiseLeg
 			{
-				active = True
+				active = False
 				guiActive = True
 				guiIcon = Raise Legs
 				guiName = Raise Legs
@@ -1998,9 +794,9 @@ PART
 }
 PART
 {
-	part = ATV.LandingLeg_4294734838
+	part = ATV.LandingLeg_4294789474
 	partName = Part
-	pos = 0.7696059,17.87698,0.5011755
+	pos = 0.8109241,6.939408,0.4681871
 	rot = 1.131334E-08,-0.9659259,-4.222196E-08,-0.258819
 	attRot = 0.7071067,0,0,-0.7071067
 	mir = 1,1,1
@@ -2010,9 +806,9 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = ATV.LandingLeg_4294735856
-	sym = ATV.LandingLeg_4294734898
-	srfN = srfAttach,ATV.CrewCabin_4294736510
+	sym = ATV.LandingLeg_4294789696
+	sym = ATV.LandingLeg_4294789534
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -2037,7 +833,7 @@ PART
 		{
 			LowerLeg
 			{
-				active = False
+				active = True
 				guiActive = True
 				guiIcon = Lower Legs
 				guiName = Lower Legs
@@ -2048,7 +844,7 @@ PART
 			}
 			RaiseLeg
 			{
-				active = True
+				active = False
 				guiActive = True
 				guiIcon = Raise Legs
 				guiName = Raise Legs
@@ -2175,21 +971,21 @@ PART
 }
 PART
 {
-	part = ATV.HeatShield_4294732546
+	part = ATV.HeatShield_4294786344
 	partName = Part
-	pos = -0.03180598,17.88157,0.03848028
+	pos = 0,6.944,0
 	rot = 0,0,0,1
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
 	dstg = 0
-	sidx = 0
-	sqor = 0
+	sidx = -1
+	sqor = -1
 	attm = 0
 	modCost = 0
-	link = KerbalATVPropulsion_4294745048
-	attN = bottom,KerbalATVPropulsion_4294745048
-	attN = top,ATV.CrewCabin_4294736510
+	link = KerbalATVPropulsion_4294783346
+	attN = bottom,KerbalATVPropulsion_4294783346
+	attN = top,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -2311,27 +1107,23 @@ PART
 }
 PART
 {
-	part = KerbalATVPropulsion_4294745048
+	part = KerbalATVPropulsion_4294783346
 	partName = Part
-	pos = -0.03180598,17.39188,0.03848028
+	pos = 0,6.454311,0
 	rot = 0,0,0,1
 	attRot = 0,0,0,1
 	mir = 1,1,1
-	istg = 1
+	istg = 0
 	dstg = 0
-	sidx = 0
-	sqor = 1
+	sidx = -1
+	sqor = -1
 	attm = 0
 	modCost = 0
-	link = RCSBlock_4294744926
-	link = RCSBlock_4294744876
-	link = RCSBlock_4294744826
-	link = RCSBlock_4294744776
-	link = solarPanels2_4294744726
-	link = solarPanels2_4294744604
-	link = solarPanels2_4294744482
-	link = solarPanels2_4294744360
-	attN = top,ATV.HeatShield_4294732546
+	link = RCSBlock_4294781880
+	link = RCSBlock_4294781484
+	link = RCSBlock_4294781394
+	link = RCSBlock_4294781304
+	attN = top,ATV.HeatShield_4294786344
 	EVENTS
 	{
 	}
@@ -2556,10 +1348,10 @@ PART
 }
 PART
 {
-	part = RCSBlock_4294744926
+	part = RCSBlock_4294781880
 	partName = Part
-	pos = -1.331411,17.11802,0.03922263
-	rot = -1.529773E-09,0,2.333987E-08,-1
+	pos = -0.0007423874,6.194852,-1.303198
+	rot = 1.335753E-07,0.7071068,-1.171424E-07,-0.7071069
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -2568,10 +1360,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = RCSBlock_4294744876
-	sym = RCSBlock_4294744826
-	sym = RCSBlock_4294744776
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781484
+	sym = RCSBlock_4294781394
+	sym = RCSBlock_4294781304
+	srfN = srfAttach,KerbalATVPropulsion_4294783346
 	EVENTS
 	{
 	}
@@ -2655,79 +1447,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -2751,10 +1470,10 @@ PART
 }
 PART
 {
-	part = RCSBlock_4294744876
+	part = RCSBlock_4294781484
 	partName = Part
-	pos = -0.03106371,17.11802,1.338085
-	rot = 1.542207E-08,-0.7071068,1.75855E-08,-0.7071068
+	pos = -1.303198,6.194852,0.0007423097
+	rot = 1.161981E-08,-8.42937E-08,-1.772842E-07,-1
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -2763,10 +1482,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = RCSBlock_4294744926
-	sym = RCSBlock_4294744826
-	sym = RCSBlock_4294744776
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781880
+	sym = RCSBlock_4294781394
+	sym = RCSBlock_4294781304
+	srfN = srfAttach,KerbalATVPropulsion_4294783346
 	EVENTS
 	{
 	}
@@ -2850,79 +1569,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -2946,10 +1592,10 @@ PART
 }
 PART
 {
-	part = RCSBlock_4294744826
+	part = RCSBlock_4294781394
 	partName = Part
-	pos = 1.267798,17.11802,0.03773782
-	rot = 2.333987E-08,-1,1.529772E-09,4.371139E-08
+	pos = 0.0007425013,6.194852,1.303198
+	rot = -1.171424E-07,-0.7071069,-1.335753E-07,-0.7071067
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -2958,10 +1604,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = RCSBlock_4294744926
-	sym = RCSBlock_4294744876
-	sym = RCSBlock_4294744776
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781880
+	sym = RCSBlock_4294781484
+	sym = RCSBlock_4294781304
+	srfN = srfAttach,KerbalATVPropulsion_4294783346
 	EVENTS
 	{
 	}
@@ -3045,79 +1691,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -3141,10 +1714,10 @@ PART
 }
 PART
 {
-	part = RCSBlock_4294744776
+	part = RCSBlock_4294781304
 	partName = Part
-	pos = -0.03254841,17.11802,-1.261124
-	rot = 1.75855E-08,-0.7071068,-1.542207E-08,0.7071068
+	pos = 1.303198,6.194852,-0.000742465
+	rot = -1.772842E-07,-1,-1.161981E-08,8.42937E-08
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -3153,10 +1726,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = RCSBlock_4294744926
-	sym = RCSBlock_4294744876
-	sym = RCSBlock_4294744826
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781880
+	sym = RCSBlock_4294781484
+	sym = RCSBlock_4294781394
+	srfN = srfAttach,KerbalATVPropulsion_4294783346
 	EVENTS
 	{
 	}
@@ -3240,79 +1813,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 100
-		currentScale = 100
-		defaultScale = 100
-		isFreeScale = True
-		version = 1.43.0.0
-		defaultTransformScale = (1.25, 1.25, 1.25)
-		dryCost = 450
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 25
-			maxValue = 400
-			incrementLarge = 37.5
-			incrementSmall = 3.75
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -3336,10 +1836,10 @@ PART
 }
 PART
 {
-	part = solarPanels2_4294744726
+	part = RCSBlock_4294781032
 	partName = Part
-	pos = -1.108179,16.88481,-0.5829638
-	rot = 2.204301E-08,0.258819,-6.493656E-08,-0.9659259
+	pos = -0.0007424048,10.81642,-1.501808
+	rot = 4.452514E-08,0.7071068,-3.904742E-08,-0.7071069
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -3348,8 +1848,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = solarPanels2_4294744604
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294779120
+	sym = RCSBlock_4294778990
+	sym = RCSBlock_4294778860
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -3358,48 +1860,37 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleDeployableSolarPanel
+		name = ModuleRCS
 		isEnabled = True
-		currentRotation = (0, 0, 0, 0)
-		stateString = RETRACTED
-		storedAnimationTime = 0
-		storedAnimationSpeed = 0
+		isEnabled = True
 		EVENTS
 		{
-			Extend
+			Disable
 			{
 				active = True
 				guiActive = True
-				guiIcon = Extend Panels
-				guiName = Extend Panels
-				category = Extend Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Disable RCS Port
+				guiName = Disable RCS Port
+				category = Disable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			Retract
+			Enable
 			{
-				active = True
+				active = False
 				guiActive = True
-				guiIcon = Retract Panels
-				guiName = Retract Panels
-				category = Retract Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Enable RCS Port
+				guiName = Enable RCS Port
+				category = Enable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
 		}
 		ACTIONS
 		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-			}
-			ExtendAction
-			{
-				actionGroup = None
-			}
-			RetractAction
+			ToggleAction
 			{
 				actionGroup = None
 			}
@@ -3444,79 +1935,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 1
-		currentScale = 1
-		defaultScale = 1
-		isFreeScale = False
-		version = 1.43.0.0
-		defaultTransformScale = (1, 1, 1)
-		dryCost = 400
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 0.625
-			maxValue = 5
-			incrementLarge = 1.25
-			incrementSmall = 0.125
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -3540,10 +1958,10 @@ PART
 }
 PART
 {
-	part = solarPanels2_4294744604
+	part = RCSBlock_4294779120
 	partName = Part
-	pos = 1.044567,16.88481,0.6599243
-	rot = -6.493656E-08,-0.9659259,-2.204301E-08,-0.258819
+	pos = -1.501807,10.81642,0.0007423152
+	rot = 3.87333E-09,-8.42937E-08,-5.909472E-08,-1
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -3552,8 +1970,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = solarPanels2_4294744726
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781032
+	sym = RCSBlock_4294778990
+	sym = RCSBlock_4294778860
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -3562,48 +1982,37 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleDeployableSolarPanel
+		name = ModuleRCS
 		isEnabled = True
-		currentRotation = (0, 0, 0, 0)
-		stateString = RETRACTED
-		storedAnimationTime = 0
-		storedAnimationSpeed = 0
+		isEnabled = True
 		EVENTS
 		{
-			Extend
+			Disable
 			{
 				active = True
 				guiActive = True
-				guiIcon = Extend Panels
-				guiName = Extend Panels
-				category = Extend Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Disable RCS Port
+				guiName = Disable RCS Port
+				category = Disable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			Retract
+			Enable
 			{
-				active = True
+				active = False
 				guiActive = True
-				guiIcon = Retract Panels
-				guiName = Retract Panels
-				category = Retract Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Enable RCS Port
+				guiName = Enable RCS Port
+				category = Enable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
 		}
 		ACTIONS
 		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-			}
-			ExtendAction
-			{
-				actionGroup = None
-			}
-			RetractAction
+			ToggleAction
 			{
 				actionGroup = None
 			}
@@ -3648,79 +2057,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 1
-		currentScale = 1
-		defaultScale = 1
-		isFreeScale = False
-		version = 1.43.0.0
-		defaultTransformScale = (1, 1, 1)
-		dryCost = 400
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 0.625
-			maxValue = 5
-			incrementLarge = 1.25
-			incrementSmall = 0.125
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -3744,10 +2080,10 @@ PART
 }
 PART
 {
-	part = solarPanels2_4294744482
+	part = RCSBlock_4294778990
 	partName = Part
-	pos = -1.109643,16.87619,0.6607692
-	rot = 2.128212E-08,-0.258819,1.069924E-07,-0.9659259
+	pos = 0.0007425361,10.81642,1.501808
+	rot = -3.904742E-08,-0.7071069,-4.452514E-08,-0.7071067
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -3756,8 +2092,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = solarPanels2_4294744360
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781032
+	sym = RCSBlock_4294779120
+	sym = RCSBlock_4294778860
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -3766,48 +2104,37 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleDeployableSolarPanel
+		name = ModuleRCS
 		isEnabled = True
-		currentRotation = (0, 0, 0, 0)
-		stateString = RETRACTED
-		storedAnimationTime = 0
-		storedAnimationSpeed = 0
+		isEnabled = True
 		EVENTS
 		{
-			Extend
+			Disable
 			{
 				active = True
 				guiActive = True
-				guiIcon = Extend Panels
-				guiName = Extend Panels
-				category = Extend Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Disable RCS Port
+				guiName = Disable RCS Port
+				category = Disable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			Retract
+			Enable
 			{
-				active = True
+				active = False
 				guiActive = True
-				guiIcon = Retract Panels
-				guiName = Retract Panels
-				category = Retract Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Enable RCS Port
+				guiName = Enable RCS Port
+				category = Enable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
 		}
 		ACTIONS
 		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-			}
-			ExtendAction
-			{
-				actionGroup = None
-			}
-			RetractAction
+			ToggleAction
 			{
 				actionGroup = None
 			}
@@ -3852,79 +2179,6 @@ PART
 		{
 		}
 	}
-	MODULE
-	{
-		name = TweakScale
-		isEnabled = True
-		tweakScale = 1
-		currentScale = 1
-		defaultScale = 1
-		isFreeScale = False
-		version = 1.43.0.0
-		defaultTransformScale = (1, 1, 1)
-		dryCost = 400
-		tweakScale_UIEditor
-		{
-			controlEnabled = True
-			minValue = 0.625
-			maxValue = 5
-			incrementLarge = 1.25
-			incrementSmall = 0.125
-			incrementSlide = 0.001
-		}
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-	}
-	MODULE
-	{
-		name = KASModuleGrab
-		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
-		EVENTS
-		{
-			ContextMenuGrab
-			{
-				active = True
-				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuDrop
-			{
-				active = True
-				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			ContextMenuEvaAttach
-			{
-				active = True
-				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-		}
-	}
 	RESOURCE
 	{
 		name = Quality
@@ -3948,10 +2202,10 @@ PART
 }
 PART
 {
-	part = solarPanels2_4294744360
+	part = RCSBlock_4294778860
 	partName = Part
-	pos = 1.04603,16.87619,-0.5838088
-	rot = 1.069924E-07,-0.9659259,-2.128212E-08,0.258819
+	pos = 1.501807,10.81642,-0.0007424942
+	rot = -5.909472E-08,-1,-3.87333E-09,8.42937E-08
 	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
@@ -3960,8 +2214,10 @@ PART
 	sqor = -1
 	attm = 1
 	modCost = 0
-	sym = solarPanels2_4294744482
-	srfN = srfAttach,KerbalATVPropulsion_4294745048
+	sym = RCSBlock_4294781032
+	sym = RCSBlock_4294779120
+	sym = RCSBlock_4294778990
+	srfN = srfAttach,ATV.CrewCabin_4294794258
 	EVENTS
 	{
 	}
@@ -3970,48 +2226,37 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleDeployableSolarPanel
+		name = ModuleRCS
 		isEnabled = True
-		currentRotation = (0, 0, 0, 0)
-		stateString = RETRACTED
-		storedAnimationTime = 0
-		storedAnimationSpeed = 0
+		isEnabled = True
 		EVENTS
 		{
-			Extend
+			Disable
 			{
 				active = True
 				guiActive = True
-				guiIcon = Extend Panels
-				guiName = Extend Panels
-				category = Extend Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Disable RCS Port
+				guiName = Disable RCS Port
+				category = Disable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			Retract
+			Enable
 			{
-				active = True
+				active = False
 				guiActive = True
-				guiIcon = Retract Panels
-				guiName = Retract Panels
-				category = Retract Panels
-				guiActiveUnfocused = True
-				unfocusedRange = 4
+				guiIcon = Enable RCS Port
+				guiName = Enable RCS Port
+				category = Enable RCS Port
+				guiActiveUnfocused = False
+				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
 		}
 		ACTIONS
 		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-			}
-			ExtendAction
-			{
-				actionGroup = None
-			}
-			RetractAction
+			ToggleAction
 			{
 				actionGroup = None
 			}
@@ -4056,26 +2301,145 @@ PART
 		{
 		}
 	}
+	RESOURCE
+	{
+		name = Quality
+		amount = 50
+		maxAmount = 100
+		flowState = True
+		isTweakable = True
+		hideFlow = True
+		flowMode = Both
+	}
+	RESOURCE
+	{
+		name = Durability
+		amount = 5000
+		maxAmount = 5000
+		flowState = True
+		isTweakable = False
+		hideFlow = True
+		flowMode = Both
+	}
+}
+PART
+{
+	part = ATV.Parachute_4294775644
+	partName = Part
+	pos = 0.7893898,11.37113,4.705131E-08
+	rot = 0.4374341,0.5574781,-0.5467577,-0.4460109
+	attRot = 0.03084361,0.03084361,-0.7064338,0.7064338
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	modCost = 0
+	sym = ATV.Parachute_4294774350
+	srfN = srfAttach,ATV.CrewCabin_4294794258
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
 	MODULE
 	{
-		name = TweakScale
+		name = ModuleParachute
 		isEnabled = True
-		tweakScale = 1
-		currentScale = 1
-		defaultScale = 1
-		isFreeScale = False
-		version = 1.43.0.0
-		defaultTransformScale = (1, 1, 1)
-		dryCost = 400
-		tweakScale_UIEditor
+		persistentState = STOWED
+		deployAltitude = 575
+		minAirPressureToOpen = 0.01
+		staged = False
+		deployAltitude_UIFlight
 		{
 			controlEnabled = True
-			minValue = 0.625
-			maxValue = 5
-			incrementLarge = 1.25
-			incrementSmall = 0.125
-			incrementSlide = 0.001
+			minValue = 50
+			maxValue = 5000
+			stepIncrement = 50
 		}
+		minAirPressureToOpen_UIFlight
+		{
+			controlEnabled = True
+			minValue = 0.01
+			maxValue = 0.5
+			stepIncrement = 0.01
+		}
+		EVENTS
+		{
+			Deploy
+			{
+				active = True
+				guiActive = True
+				guiIcon = Deploy Chute
+				guiName = Deploy Chute
+				category = Deploy Chute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+			CutParachute
+			{
+				active = False
+				guiActive = True
+				guiIcon = Cut Parachute
+				guiName = Cut Parachute
+				category = Cut Parachute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+			Repack
+			{
+				active = False
+				guiActive = False
+				guiIcon = Repack Chute
+				guiName = Repack Chute
+				category = Repack Chute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			DeployAction
+			{
+				actionGroup = None
+			}
+			CutAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleTestSubject
+		isEnabled = True
+		EVENTS
+		{
+			RunTestEvent
+			{
+				active = False
+				guiActive = True
+				guiIcon = Run Test
+				guiName = Run Test
+				category = Run Test
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+		}
+	}
+	MODULE
+	{
+		name = DummyPartModule
+		isEnabled = True
 		EVENTS
 		{
 		}
@@ -4085,43 +2449,421 @@ PART
 	}
 	MODULE
 	{
-		name = KASModuleGrab
+		name = DurabilityModule
 		isEnabled = True
-		grabbed = False
-		evaHolderVesselName = 
+		quality = 0.5
+		minDurability = 150
+		canExplode = False
+		canRepair = True
+		maxRepair = -1
+		lastReduceRange = 0
 		EVENTS
 		{
-			ContextMenuGrab
+			RepairDamage
 			{
 				active = True
 				guiActive = False
-				guiIcon = Grab
-				guiName = Grab
-				category = Grab
+				guiIcon = No Damage (Durability)
+				guiName = No Damage (Durability)
+				category = No Damage (Durability)
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+		}
+	}
+	RESOURCE
+	{
+		name = Quality
+		amount = 50
+		maxAmount = 100
+		flowState = True
+		isTweakable = True
+		hideFlow = True
+		flowMode = Both
+	}
+	RESOURCE
+	{
+		name = Durability
+		amount = 5000
+		maxAmount = 5000
+		flowState = True
+		isTweakable = False
+		hideFlow = True
+		flowMode = Both
+	}
+}
+PART
+{
+	part = ATV.Parachute_4294774350
+	partName = Part
+	pos = -0.7893898,11.37113,2.195935E-08
+	rot = -0.5467577,-0.4460109,-0.437434,-0.5574781
+	attRot = 0.03084361,0.03084361,-0.7064338,0.7064338
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	modCost = 0
+	sym = ATV.Parachute_4294775644
+	srfN = srfAttach,ATV.CrewCabin_4294794258
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleParachute
+		isEnabled = True
+		persistentState = STOWED
+		deployAltitude = 575
+		minAirPressureToOpen = 0.01
+		staged = False
+		deployAltitude_UIFlight
+		{
+			controlEnabled = True
+			minValue = 50
+			maxValue = 5000
+			stepIncrement = 50
+		}
+		minAirPressureToOpen_UIFlight
+		{
+			controlEnabled = True
+			minValue = 0.01
+			maxValue = 0.5
+			stepIncrement = 0.01
+		}
+		EVENTS
+		{
+			Deploy
+			{
+				active = True
+				guiActive = True
+				guiIcon = Deploy Chute
+				guiName = Deploy Chute
+				category = Deploy Chute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+			CutParachute
+			{
+				active = False
+				guiActive = True
+				guiIcon = Cut Parachute
+				guiName = Cut Parachute
+				category = Cut Parachute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+			Repack
+			{
+				active = False
+				guiActive = False
+				guiIcon = Repack Chute
+				guiName = Repack Chute
+				category = Repack Chute
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			DeployAction
+			{
+				actionGroup = None
+			}
+			CutAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleTestSubject
+		isEnabled = True
+		EVENTS
+		{
+			RunTestEvent
+			{
+				active = False
+				guiActive = True
+				guiIcon = Run Test
+				guiName = Run Test
+				category = Run Test
 				guiActiveUnfocused = False
 				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			ContextMenuDrop
+		}
+		ACTIONS
+		{
+		}
+	}
+	MODULE
+	{
+		name = DummyPartModule
+		isEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+	}
+	MODULE
+	{
+		name = DurabilityModule
+		isEnabled = True
+		quality = 0.5
+		minDurability = 150
+		canExplode = False
+		canRepair = True
+		maxRepair = -1
+		lastReduceRange = 0
+		EVENTS
+		{
+			RepairDamage
 			{
 				active = True
 				guiActive = False
-				guiIcon = Drop
-				guiName = Drop
-				category = Drop
+				guiIcon = No Damage (Durability)
+				guiName = No Damage (Durability)
+				category = No Damage (Durability)
+				guiActiveUnfocused = True
+				unfocusedRange = 4
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+		}
+	}
+	RESOURCE
+	{
+		name = Quality
+		amount = 50
+		maxAmount = 100
+		flowState = True
+		isTweakable = True
+		hideFlow = True
+		flowMode = Both
+	}
+	RESOURCE
+	{
+		name = Durability
+		amount = 5000
+		maxAmount = 5000
+		flowState = True
+		isTweakable = False
+		hideFlow = True
+		flowMode = Both
+	}
+}
+PART
+{
+	part = SciFiDockingPort_4294773682
+	partName = Part
+	pos = 0,12.00729,0
+	rot = 0,0,0,1
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	modCost = 0
+	attN = bottom,ATV.CrewCabin_4294794258
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleDockingNode
+		isEnabled = True
+		state = Ready
+		dockUId = 0
+		dockNodeIdx = 0
+		EVENTS
+		{
+			Undock
+			{
+				active = False
+				guiActive = True
+				guiIcon = Undock
+				guiName = Undock
+				category = Undock
+				guiActiveUnfocused = True
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			UndockSameVessel
+			{
+				active = False
+				guiActive = True
+				guiIcon = Undock
+				guiName = Undock
+				category = Undock
+				guiActiveUnfocused = True
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Decouple
+			{
+				active = False
+				guiActive = True
+				guiIcon = Decouple Node
+				guiName = Decouple Node
+				category = Decouple Node
+				guiActiveUnfocused = True
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			SetAsTarget
+			{
+				active = True
+				guiActive = False
+				guiIcon = Set as Target
+				guiName = Set as Target
+				category = Set as Target
+				guiActiveUnfocused = True
+				unfocusedRange = 200
+				externalToEVAOnly = False
+			}
+			UnsetTarget
+			{
+				active = True
+				guiActive = False
+				guiIcon = Unset Target
+				guiName = Unset Target
+				category = Unset Target
+				guiActiveUnfocused = True
+				unfocusedRange = 200
+				externalToEVAOnly = False
+			}
+			EnableXFeed
+			{
+				active = False
+				guiActive = True
+				guiIcon = Enable Crossfeed
+				guiName = Enable Crossfeed
+				category = Enable Crossfeed
 				guiActiveUnfocused = False
 				unfocusedRange = 2
 				externalToEVAOnly = True
 			}
-			ContextMenuEvaAttach
+			DisableXFeed
+			{
+				active = False
+				guiActive = True
+				guiIcon = Disable Crossfeed
+				guiName = Disable Crossfeed
+				category = Disable Crossfeed
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			MakeReferenceTransform
+			{
+				active = True
+				guiActive = True
+				guiIcon = Control from Here
+				guiName = Control from Here
+				category = Control from Here
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			UndockAction
+			{
+				actionGroup = None
+			}
+			DecoupleAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleAnimateGeneric
+		isEnabled = True
+		status = Locked
+		animSwitch = True
+		animTime = 0
+		animSpeed = -1
+		EVENTS
+		{
+			Toggle
+			{
+				active = True
+				guiActive = True
+				guiActiveEditor = True
+				guiIcon = Toggle
+				guiName = Open Port
+				category = Toggle
+				guiActiveUnfocused = True
+				unfocusedRange = 5
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = DummyPartModule
+		isEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+	}
+	MODULE
+	{
+		name = DurabilityModule
+		isEnabled = True
+		quality = 0.5
+		minDurability = 150
+		canExplode = False
+		canRepair = True
+		maxRepair = -1
+		lastReduceRange = 0
+		EVENTS
+		{
+			RepairDamage
 			{
 				active = True
 				guiActive = False
-				guiIcon = Attach
-				guiName = Attach
-				category = Attach
-				guiActiveUnfocused = False
-				unfocusedRange = 2
+				guiIcon = No Damage (Durability)
+				guiName = No Damage (Durability)
+				category = No Damage (Durability)
+				guiActiveUnfocused = True
+				unfocusedRange = 4
 				externalToEVAOnly = True
 			}
 		}
