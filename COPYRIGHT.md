@@ -1,18 +1,13 @@
-Das-Mod-Projekt
+GermanSpaceAlliance - Stations
 ===============
 
-Die zentrale Sammelstelle für den Code des KSP.de - Mod Projektes
+Copyrights:
 
-ThomasKerman: 
-	Flags: GSA1.png
-	Parts: Ariane_Main; Ariane_Second; Ariane_Fairing_new; GSA-MultiHub;; GSA-ScienceBox; GSA-ScienceEngine; 			GSA-ScienceRack;
+Thomas P. Kerman: 
+	Parts: GSA-MultiHub; GSA-ScienceBox; GSA-ScienceEngine; GSA-ScienceRack; CrewATV LandingLeg, CrewATV Heatshield, CrewATV MainModule
 
 runner78: 
-  Plugins: Durability; Storage Container;
-  Parts: GSA-PA01-MK-I; GSA-SC01-MK-I; GSA-SPLAP-T3;
-  
-JebediahKerman:
-	Parts: Merlin 1D; Falcon 9 MainTank;
+  Parts: GSA-PA01-MK-I; GSA-SC01-MK-I; GSA-SPLAP-T3; GSA-NODE-T3
 	
 Fr3aKyHDx:
-	Parts: ATV Versorgungs Modul; ATV Triebwerk Modul; ATV Antenne; Docking Port; [DEV] Ariane 5 Booster
+	Parts: ATV Versorgungs Modul; ATV Triebwerk Modul; ATV Antenne; Docking Port
